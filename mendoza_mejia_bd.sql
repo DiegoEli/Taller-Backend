@@ -1,0 +1,29 @@
+DROP DATABASE IF EXISTS mendoza_mejia_bd;
+
+CREATE SCHEMA IF NOT EXISTS mendoza_mejia_bd;
+USE mendoza_mejia_bd;
+
+DROP TABLE IF EXISTS Usuario;  
+CREATE TABLE IF NOT EXISTS Usuario (
+  Id INT NOT NULL PRIMARY KEY,
+  nombreUsuario VARCHAR(10) NOT NULL,
+  clave VARCHAR(10) NOT NULL,
+  estado VARCHAR(2) NULL,
+  GeneroId INT NOT NULL,
+  FOREIGN KEY (GeneroId) REFERENCES Genero (GeneroId)
+);
+
+DROP TABLE IF EXISTS Genero;  
+CREATE TABLE IF NOT EXISTS Genero (
+  Id INT NOT NULL PRIMARY KEY,
+  nombre VARCHAR(10),
+  estado VARCHAR(2) NULL
+);
+
+DROP TABLE IF EXISTS HistorialAcceso;  
+CREATE TABLE IF NOT EXISTS HistorialAcceso (
+  Id INT NOT NULL PRIMARY KEY,
+  fechaHora DATE NOT NULL,
+  UsuarioId INT NOT NULL,
+  FOREIGN KEY (UsuarioId) REFERENCES Usuario (UsuarioId)
+);
